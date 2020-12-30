@@ -84,6 +84,21 @@ class Collection
         return $this;
     }
 
+    public function first()
+    {
+        return $this->collection[0];
+    }
+
+    public function last()
+    {
+        return end($this->collection);
+    }
+
+    public function getByIndex(int $index)
+    {
+        return $this->collection[$index];
+    }
+
     public function toArray(): array
     {
         return $this->collection;

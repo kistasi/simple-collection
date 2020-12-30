@@ -26,6 +26,29 @@ class CollectionTest extends TestCase
         $this->assertSame(['a'], $collection->toArray());
     }
 
+    public function testFirst()
+    {
+        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+
+        $this->assertSame('a', $collection->first());
+    }
+
+    public function testLast()
+    {
+        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+
+        $this->assertSame('c', $collection->last());
+    }
+
+    public function testGetByIndex()
+    {
+        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+
+        $this->assertSame('a', $collection->getByIndex(0));
+        $this->assertSame('b', $collection->getByIndex(1));
+        $this->assertSame('c', $collection->getByIndex(2));
+    }
+
     public function testGet()
     {
         $collection = new SimpleCollection\Collection(['name' => 'Robin', 'age' => 29]);
