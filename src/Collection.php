@@ -30,7 +30,7 @@ class Collection
         return $result;
     }
 
-    public function append($values): array
+    public function append($values): self
     {
         if (!is_array($values)) {
             $values = [ $values ];
@@ -44,11 +44,11 @@ class Collection
 
         $this->collection = $collection;
 
-        return $this->collection;
+        return $this;
     }
 
 
-    public function prepend($values): array
+    public function prepend($values): self
     {
         if (!is_array($values)) {
             $values = [ $values ];
@@ -64,10 +64,10 @@ class Collection
 
         $this->collection = $collection;
 
-        return $this->collection;
+        return $this;
     }
 
-    public function remove($values): array
+    public function remove($values): self
     {
         if (!is_array($values)) {
             $values = [ $values ];
@@ -81,7 +81,7 @@ class Collection
 
         $this->collection = array_values($collection);
 
-        return $this->collection;
+        return $this;
     }
 
     public function toArray(): array

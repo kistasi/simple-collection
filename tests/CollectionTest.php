@@ -16,6 +16,16 @@ class CollectionTest extends TestCase
         $this->assertSame(['a', 'b', 'c'], $collection3->toArray());
     }
 
+    public function testChaining()
+    {
+        $collection = new SimpleCollection\Collection();
+        $collection
+            ->append(['a', 'b'])
+            ->remove('b');
+
+        $this->assertSame(['a'], $collection->toArray());
+    }
+
     public function testGet()
     {
         $collection = new SimpleCollection\Collection(['name' => 'Robin', 'age' => 29]);
