@@ -62,6 +62,15 @@ class CollectionTest extends TestCase
         $this->assertFalse($collection->isEmpty());
     }
 
+    public function testIsNotEmpty()
+    {
+        $collection = new SimpleCollection\Collection();
+        $this->assertFalse($collection->isNotEmpty());
+
+        $collection = new SimpleCollection\Collection(['a']);
+        $this->assertTrue($collection->isNotEmpty());
+    }
+
     public function testGetByIndex()
     {
         $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
@@ -77,6 +86,14 @@ class CollectionTest extends TestCase
 
         $this->assertSame('Robin', $collection->get('name'));
         $this->assertSame(29, $collection->get('age'));
+    }
+
+    public function testHas()
+    {
+        $collection = new SimpleCollection\Collection(['name' => 'Robin', 'age' => 29]);
+
+        $this->assertTrue($collection->has('name'));
+        $this->assertFalse($collection->has('something'));
     }
 
     public function testOnly()

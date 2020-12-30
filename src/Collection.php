@@ -18,6 +18,11 @@ class Collection
         return $this->collection[$values];
     }
 
+    public function has(string $value): bool
+    {
+        return array_key_exists($value, $this->collection);
+    }
+
     public function only(array $values)
     {
         $collection = $this->collection;
@@ -107,6 +112,11 @@ class Collection
     public function isEmpty(): bool
     {
         return empty($this->collection);
+    }
+
+    public function isNotEmpty(): bool
+    {
+        return !empty($this->collection);
     }
 
     public function toJson(): string
