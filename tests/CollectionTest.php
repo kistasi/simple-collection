@@ -24,6 +24,12 @@ class CollectionTest extends TestCase
         $this->assertSame(29, $collection->get('age'));
     }
 
+    public function testOnly()
+    {
+        $collection = new SimpleCollection\Collection(['name' => 'Lily', 'age' => 27, 'location' => 'New York']);
+        $this->assertSame( ['name' => 'Lily', 'age' => 27], $collection->only(['name', 'age']) );
+    }
+
     public function testAppend()
     {
         $collection = new SimpleCollection\Collection(['a']);

@@ -13,9 +13,21 @@ class Collection
         $this->collection = $array;
     }
 
-    public function get($value)
+    public function get($values)
     {
-        return $this->collection[$value];
+        return $this->collection[$values];
+    }
+
+    public function only(array $values)
+    {
+        $collection = $this->collection;
+
+        $result = [];
+        foreach ($values as $value) {
+            $result[$value] = $collection[$value];
+        }
+
+        return $result;
     }
 
     public function append($value): array
