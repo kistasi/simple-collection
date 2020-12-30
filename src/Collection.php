@@ -104,6 +104,11 @@ class Collection
         return empty($this->collection);
     }
 
+    public function toJson(): string
+    {
+        return json_encode($this->collection);
+    }
+
     public function toArray(): array
     {
         return $this->collection;

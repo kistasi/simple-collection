@@ -13,7 +13,9 @@
             "email": "marton.tasnadi@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "ext-json": "*"
+    },
     "autoload": {
         "psr-4": {
           "SimpleCollection\\": "src/"

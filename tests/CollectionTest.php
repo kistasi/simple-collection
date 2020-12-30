@@ -16,6 +16,12 @@ class CollectionTest extends TestCase
         $this->assertSame(['a', 'b', 'c'], $collection3->toArray());
     }
 
+    public function testToJson()
+    {
+        $collection = new SimpleCollection\Collection(['a', 'b']);
+        $this->assertSame('["a","b"]', $collection->toJson());
+    }
+
     public function testChaining()
     {
         $collection = new SimpleCollection\Collection();
