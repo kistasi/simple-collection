@@ -40,6 +40,16 @@ class CollectionTest extends TestCase
         $this->assertSame('c', $collection->last());
     }
 
+
+    public function testIsEmpty()
+    {
+        $collection = new SimpleCollection\Collection();
+        $this->assertTrue($collection->isEmpty());
+
+        $collection = new SimpleCollection\Collection(['a']);
+        $this->assertFalse($collection->isEmpty());
+    }
+
     public function testGetByIndex()
     {
         $collection = new SimpleCollection\Collection(['a', 'b', 'c']);

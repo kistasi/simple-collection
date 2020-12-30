@@ -99,6 +99,11 @@ class Collection
         return $this->collection[$index];
     }
 
+    public function isEmpty(): bool
+    {
+        return empty($this->collection);
+    }
+
     public function toArray(): array
     {
         return $this->collection;
