@@ -34,15 +34,10 @@ class CollectionTest extends TestCase
     {
         $collection = new SimpleCollection\Collection(['a']);
         $collection->append('b');
-
         $this->assertSame(['a', 'b'], $collection->toArray());
-    }
 
-    public function testAppendMultiple()
-    {
         $collection = new SimpleCollection\Collection();
-        $collection->appendMultiple(['a', 'b', 'c']);
-
+        $collection->append(['a', 'b', 'c']);
         $this->assertSame(['a', 'b', 'c'], $collection->toArray());
     }
 

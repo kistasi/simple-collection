@@ -30,25 +30,23 @@ class Collection
         return $result;
     }
 
-    public function append($value): array
+    public function append($values): array
     {
+        if (!is_array($values)) {
+            $values = [ $values ];
+        }
+
         $collection = $this->collection;
 
-        $collection[] = $value;
+        foreach ($values as $value) {
+            $collection[] = $value;
+        }
 
         $this->collection = $collection;
 
         return $this->collection;
     }
 
-    public function appendMultiple(array $values): array
-    {
-        $collection = $this->collection;
-
-        $this->collection = array_merge($collection, $values);
-
-        return $this->collection;
-    }
 
     public function prepend($value): array
     {
