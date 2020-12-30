@@ -99,6 +99,11 @@ class Collection
         return $this->collection[$index];
     }
 
+    public function count()
+    {
+        return count($this->collection);
+    }
+
     public function isEmpty(): bool
     {
         return empty($this->collection);
