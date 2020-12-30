@@ -48,19 +48,12 @@ class Collection
     }
 
 
-    public function prepend($value): array
+    public function prepend($values): array
     {
-        $collection = $this->collection;
+        if (!is_array($values)) {
+            $values = [ $values ];
+        }
 
-        array_unshift($collection, $value);
-
-        $this->collection = $collection;
-
-        return $this->collection;
-    }
-
-    public function prependMultiple(array $values)
-    {
         $collection = $this->collection;
 
         $values = array_reverse($values);
@@ -74,19 +67,12 @@ class Collection
         return $this->collection;
     }
 
-    public function remove(string $value): array
+    public function remove($values): array
     {
-        $collection = $this->collection;
+        if (!is_array($values)) {
+            $values = [ $values ];
+        }
 
-        unset($collection[array_search($value, $collection)]);
-
-        $this->collection = $collection;
-
-        return $this->collection;
-    }
-
-    public function removeMultiple(array $values): array
-    {
         $collection = $this->collection;
 
         foreach ($values as $value) {

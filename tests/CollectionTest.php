@@ -45,15 +45,10 @@ class CollectionTest extends TestCase
     {
         $collection = new SimpleCollection\Collection(['a', 'b']);
         $collection->prepend('c');
-
         $this->assertSame(['c', 'a', 'b'], $collection->toArray());
-    }
 
-    public function testPrependMultiple()
-    {
         $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
-        $collection->prependMultiple(['d', 'e']);
-
+        $collection->prepend(['d', 'e']);
         $this->assertSame(['d', 'e', 'a', 'b', 'c'], $collection->toArray());
     }
 
@@ -61,15 +56,10 @@ class CollectionTest extends TestCase
     {
         $collection = new SimpleCollection\Collection(['a', 'b']);
         $collection->remove('b');
-
         $this->assertSame(['a'], $collection->toArray());
-    }
 
-    public function testRemoveMultiple()
-    {
         $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
-        $collection->removeMultiple(['a', 'b']);
-
+        $collection->remove(['a', 'b']);
         $this->assertSame(['c'], $collection->toArray());
     }
 }
