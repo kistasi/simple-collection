@@ -22,6 +22,12 @@ class Collection
     use Traits\Only;
     use Traits\Has;
     use Traits\Get;
+    use Traits\Max;
+    use Traits\Min;
+    use Traits\Sum;
+    use Traits\Avg;
+    use Traits\Sync;
+    use Traits\Contains;
 
     private $collection;
 

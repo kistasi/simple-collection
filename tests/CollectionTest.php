@@ -9,11 +9,11 @@ class CollectionTest extends TestCase
         $collection = new SimpleCollection\Collection();
         $this->assertSame([], $collection->toArray());
 
-        $collection2 = new SimpleCollection\Collection([]);
-        $this->assertSame([], $collection2->toArray());
+        $collection = new SimpleCollection\Collection([]);
+        $this->assertSame([], $collection->toArray());
 
-        $collection3 = new SimpleCollection\Collection(['a', 'b', 'c']);
-        $this->assertSame(['a', 'b', 'c'], $collection3->toArray());
+        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+        $this->assertSame(['a', 'b', 'c'], $collection->toArray());
     }
 
     public function testToJson()
@@ -133,5 +133,43 @@ class CollectionTest extends TestCase
         $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
         $collection->remove(['a', 'b']);
         $this->assertSame(['c'], $collection->toArray());
+    }
+
+    public function testMin()
+    {
+        $collection = new SimpleCollection\Collection([1344, 432562, 6432]);
+        $this->assertSame(1344, $collection->min());
+    }
+
+    public function testMax()
+    {
+        $collection = new SimpleCollection\Collection([1344, 432562, 6432]);
+        $this->assertSame(432562, $collection->max());
+    }
+
+    public function testSum()
+    {
+        $collection = new SimpleCollection\Collection([10, 20, 30]);
+        $this->assertSame(60, $collection->sum());
+    }
+
+    public function testAvg()
+    {
+        $collection = new SimpleCollection\Collection([10, 20, 30]);
+        $this->assertSame(20, $collection->avg());
+    }
+
+    public function testSync()
+    {
+        $collection = new SimpleCollection\Collection([1, 2, 3]);
+        $collection->sync(['a', 'b', 'c']);
+        $this->assertSame(['a', 'b', 'c'], $collection->toArray());
+    }
+
+    public function testContains()
+    {
+        $collection = new SimpleCollection\Collection(['Lily', 'Robin']);
+        $this->assertTrue($collection->contains('Lily'));
+        $this->assertFalse($collection->contains('Ted'));
     }
 }
