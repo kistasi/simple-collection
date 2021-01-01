@@ -28,6 +28,8 @@ class Collection
     use Traits\Avg;
     use Traits\Sync;
     use Traits\Contains;
+    use Traits\IsAssoc;
+    use Traits\OnlyContainsArrays;
 
     private $collection;
 

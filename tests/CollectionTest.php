@@ -172,4 +172,25 @@ class CollectionTest extends TestCase
         $this->assertTrue($collection->contains('Lily'));
         $this->assertFalse($collection->contains('Ted'));
     }
+
+    public function testIsAssoc()
+    {
+        $collection = new SimpleCollection\Collection([1, 2]);
+        $this->assertFalse($collection->isAssoc());
+
+        $collection = new SimpleCollection\Collection(['a' => 1, 2]);
+        $this->assertTrue($collection->isAssoc());
+
+        $collection = new SimpleCollection\Collection(['a' => 1, 'b' => 2]);
+        $this->assertTrue($collection->isAssoc());
+    }
+
+    public function testOnlyContainsArrays()
+    {
+        $collection = new SimpleCollection\Collection([1, 2]);
+        $this->assertFalse($collection->onlyContainsArrays());
+
+        $collection = new SimpleCollection\Collection([[1], [2]]);
+        $this->assertTrue($collection->onlyContainsArrays());
+    }
 }
