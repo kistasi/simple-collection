@@ -173,6 +173,15 @@ class CollectionTest extends TestCase
         $this->assertFalse($collection->contains('Ted'));
     }
 
+    public function testContains_assoc()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Contains method is not working with associative arrays.');
+
+        $collection = new SimpleCollection\Collection(['name' => 'Robin', 'age' => 20]);
+        $collection->contains('asdf');
+    }
+
     public function testIsAssoc()
     {
         $collection = new SimpleCollection\Collection([1, 2]);
