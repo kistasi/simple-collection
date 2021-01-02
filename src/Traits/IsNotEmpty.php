@@ -6,6 +6,6 @@ trait IsNotEmpty
 {
     public function isNotEmpty(): bool
     {
-        return !empty($this->collection);
+        return !$this->isEmpty();
     }
 }

@@ -52,7 +52,6 @@ class CollectionTest extends TestCase
         $this->assertSame('c', $collection->last());
     }
 
-
     public function testIsEmpty()
     {
         $collection = new SimpleCollection\Collection();
@@ -86,6 +85,7 @@ class CollectionTest extends TestCase
 
         $this->assertSame('Robin', $collection->get('name'));
         $this->assertSame(29, $collection->get('age'));
+        $this->assertSame(null, $collection->get('something'));
     }
 
     public function testHas()
@@ -99,7 +99,13 @@ class CollectionTest extends TestCase
     public function testOnly()
     {
         $collection = new SimpleCollection\Collection(['name' => 'Lily', 'age' => 27, 'location' => 'New York']);
-        $this->assertSame( ['name' => 'Lily', 'age' => 27], $collection->only(['name', 'age']) );
+        $this->assertSame(['name' => 'Lily', 'age' => 27], $collection->only(['name', 'age']));
+    }
+
+    public function testOnly_2()
+    {
+        $collection = new SimpleCollection\Collection(['name' => 'Lily', 'age' => 27, 'location' => 'New York']);
+        $this->assertSame(['name' => 'Lily', 'age' => 27], $collection->only(['name', 'age', 'something']));
     }
 
     public function testAppend()
@@ -141,10 +147,50 @@ class CollectionTest extends TestCase
         $this->assertSame(1344, $collection->min());
     }
 
+    public function testMin_assoc()
+    {
+        $collection = new SimpleCollection\Collection([['age' => 10], ['age' => 50]]);
+        $this->assertSame(10, $collection->min('age'));
+    }
+
+    public function testMin_assoc_2()
+    {
+        $collection = new SimpleCollection\Collection([['age' => 10], ['age' => 50]]);
+        $this->assertSame(null, $collection->min('count'));
+    }
+
+    public function testMin_assoc_3()
+    {
+        $collection = new SimpleCollection\Collection([['age' => 10, 'count' => 30], ['age' => 50, 'count' => 30]]);
+        $this->assertSame(10, $collection->min('age'));
+        $this->assertSame(30, $collection->min('count'));
+        $this->assertSame(null, $collection->min('something'));
+    }
+
     public function testMax()
     {
         $collection = new SimpleCollection\Collection([1344, 432562, 6432]);
         $this->assertSame(432562, $collection->max());
+    }
+
+    public function testMax_assoc()
+    {
+        $collection = new SimpleCollection\Collection([['age' => 10], ['age' => 50]]);
+        $this->assertSame(50, $collection->max('age'));
+    }
+
+    public function testMax_assoc_2()
+    {
+        $collection = new SimpleCollection\Collection([['age' => 10], ['age' => 50]]);
+        $this->assertSame(null, $collection->max('count'));
+    }
+
+    public function testMax_assoc_3()
+    {
+        $collection = new SimpleCollection\Collection([['age' => 10, 'count' => 30], ['age' => 50, 'count' => 30]]);
+        $this->assertSame(50, $collection->max('age'));
+        $this->assertSame(30, $collection->max('count'));
+        $this->assertSame(null, $collection->max('something'));
     }
 
     public function testSum()

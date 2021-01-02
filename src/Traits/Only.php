@@ -10,7 +10,9 @@ trait Only
 
         $result = [];
         foreach ($values as $value) {
-            $result[$value] = $collection[$value];
+            if ($this->has($value)) {
+                $result[$value] = $collection[$value];
+            }
         }
 
         return $result;

@@ -4,8 +4,25 @@ namespace SimpleCollection\Traits;
 
 trait Min
 {
-    public function min()
+    public function min(?string $value = null)
     {
-        return min($this->collection);
+        $collection = $this->collection;
+
+        if ($this->onlyContainsArrays() && $value !== null) {
+            $temp = [];
+            foreach ($collection as $item) {
+                if (array_key_exists($value, $item)) {
+                    $temp[] = $item[$value];
+                }
+            }
+
+            if (!empty($temp)) {
+                return min($temp);
+            }
+
+            return null;
+        }
+
+        return min($collection);
     }
 }

@@ -4,8 +4,12 @@ namespace SimpleCollection\Traits;
 
 trait Get
 {
-    public function get($values)
+    public function get(string $value)
     {
-        return $this->collection[$values];
+        if ($this->has($value)) {
+            return $this->collection[$value];
+        }
+
+        return null;
     }
 }
