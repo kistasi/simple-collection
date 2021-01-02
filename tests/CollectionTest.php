@@ -20,6 +20,12 @@ class CollectionTest extends TestCase
     {
         $collection = collect(['a', 'b']);
         $this->assertSame('["a","b"]', $collection->toJson());
+
+        $collection = collect();
+        $this->assertSame('[]', $collection->toJson());
+
+        $collection = collect(['name' => 'Robin']);
+        $this->assertSame('{"name":"Robin"}', $collection->toJson());
     }
 
     public function testCount()
@@ -199,10 +205,28 @@ class CollectionTest extends TestCase
         $this->assertSame(60, $collection->sum());
     }
 
+    public function testSum_assoc()
+    {
+        $collection = collect([['count' => 10], ['count' => 20]]);
+        $this->assertSame(30, $collection->sum('count'));
+    }
+
+    public function testSum_assoc2()
+    {
+        $collection = collect([['something' => 10], ['something' => 20]]);
+        $this->assertSame(null, $collection->max('count'));
+    }
+
     public function testAvg()
     {
         $collection = collect([10, 20, 30]);
         $this->assertSame(20, $collection->avg());
+    }
+
+    public function testAvg_assoc()
+    {
+        $collection = collect([['count' => 10], ['count' => 20], ['count' => 30]]);
+        $this->assertSame(20, $collection->avg('count'));
     }
 
     public function testSync()
