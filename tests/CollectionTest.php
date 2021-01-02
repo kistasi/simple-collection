@@ -6,31 +6,31 @@ class CollectionTest extends TestCase
 {
     public function testToArray()
     {
-        $collection = new SimpleCollection\Collection();
+        $collection = collect();
         $this->assertSame([], $collection->toArray());
 
-        $collection = new SimpleCollection\Collection([]);
+        $collection = collect([]);
         $this->assertSame([], $collection->toArray());
 
-        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+        $collection = collect(['a', 'b', 'c']);
         $this->assertSame(['a', 'b', 'c'], $collection->toArray());
     }
 
     public function testToJson()
     {
-        $collection = new SimpleCollection\Collection(['a', 'b']);
+        $collection = collect(['a', 'b']);
         $this->assertSame('["a","b"]', $collection->toJson());
     }
 
     public function testCount()
     {
-        $collection = new SimpleCollection\Collection(['a', 'b']);
+        $collection = collect(['a', 'b']);
         $this->assertSame(2, $collection->count());
     }
 
     public function testChaining()
     {
-        $collection = new SimpleCollection\Collection();
+        $collection = collect();
         $collection
             ->append(['a', 'b'])
             ->remove('b');
@@ -40,39 +40,39 @@ class CollectionTest extends TestCase
 
     public function testFirst()
     {
-        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+        $collection = collect(['a', 'b', 'c']);
 
         $this->assertSame('a', $collection->first());
     }
 
     public function testLast()
     {
-        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+        $collection = collect(['a', 'b', 'c']);
 
         $this->assertSame('c', $collection->last());
     }
 
     public function testIsEmpty()
     {
-        $collection = new SimpleCollection\Collection();
+        $collection = collect();
         $this->assertTrue($collection->isEmpty());
 
-        $collection = new SimpleCollection\Collection(['a']);
+        $collection = collect(['a']);
         $this->assertFalse($collection->isEmpty());
     }
 
     public function testIsNotEmpty()
     {
-        $collection = new SimpleCollection\Collection();
+        $collection = collect();
         $this->assertFalse($collection->isNotEmpty());
 
-        $collection = new SimpleCollection\Collection(['a']);
+        $collection = collect(['a']);
         $this->assertTrue($collection->isNotEmpty());
     }
 
     public function testGetByIndex()
     {
-        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+        $collection = collect(['a', 'b', 'c']);
 
         $this->assertSame('a', $collection->getByIndex(0));
         $this->assertSame('b', $collection->getByIndex(1));
@@ -81,7 +81,7 @@ class CollectionTest extends TestCase
 
     public function testGet()
     {
-        $collection = new SimpleCollection\Collection(['name' => 'Robin', 'age' => 29]);
+        $collection = collect(['name' => 'Robin', 'age' => 29]);
 
         $this->assertSame('Robin', $collection->get('name'));
         $this->assertSame(29, $collection->get('age'));
@@ -90,7 +90,7 @@ class CollectionTest extends TestCase
 
     public function testHas()
     {
-        $collection = new SimpleCollection\Collection(['name' => 'Robin', 'age' => 29]);
+        $collection = collect(['name' => 'Robin', 'age' => 29]);
 
         $this->assertTrue($collection->has('name'));
         $this->assertFalse($collection->has('something'));
@@ -98,70 +98,70 @@ class CollectionTest extends TestCase
 
     public function testOnly()
     {
-        $collection = new SimpleCollection\Collection(['name' => 'Lily', 'age' => 27, 'location' => 'New York']);
+        $collection = collect(['name' => 'Lily', 'age' => 27, 'location' => 'New York']);
         $this->assertSame(['name' => 'Lily', 'age' => 27], $collection->only(['name', 'age']));
     }
 
     public function testOnly_2()
     {
-        $collection = new SimpleCollection\Collection(['name' => 'Lily', 'age' => 27, 'location' => 'New York']);
+        $collection = collect(['name' => 'Lily', 'age' => 27, 'location' => 'New York']);
         $this->assertSame(['name' => 'Lily', 'age' => 27], $collection->only(['name', 'age', 'something']));
     }
 
     public function testAppend()
     {
-        $collection = new SimpleCollection\Collection(['a']);
+        $collection = collect(['a']);
         $collection->append('b');
         $this->assertSame(['a', 'b'], $collection->toArray());
 
-        $collection = new SimpleCollection\Collection();
+        $collection = collect();
         $collection->append(['a', 'b', 'c']);
         $this->assertSame(['a', 'b', 'c'], $collection->toArray());
     }
 
     public function testPrepend()
     {
-        $collection = new SimpleCollection\Collection(['a', 'b']);
+        $collection = collect(['a', 'b']);
         $collection->prepend('c');
         $this->assertSame(['c', 'a', 'b'], $collection->toArray());
 
-        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+        $collection = collect(['a', 'b', 'c']);
         $collection->prepend(['d', 'e']);
         $this->assertSame(['d', 'e', 'a', 'b', 'c'], $collection->toArray());
     }
 
     public function testRemove()
     {
-        $collection = new SimpleCollection\Collection(['a', 'b']);
+        $collection = collect(['a', 'b']);
         $collection->remove('b');
         $this->assertSame(['a'], $collection->toArray());
 
-        $collection = new SimpleCollection\Collection(['a', 'b', 'c']);
+        $collection = collect(['a', 'b', 'c']);
         $collection->remove(['a', 'b']);
         $this->assertSame(['c'], $collection->toArray());
     }
 
     public function testMin()
     {
-        $collection = new SimpleCollection\Collection([1344, 432562, 6432]);
+        $collection = collect([1344, 432562, 6432]);
         $this->assertSame(1344, $collection->min());
     }
 
     public function testMin_assoc()
     {
-        $collection = new SimpleCollection\Collection([['age' => 10], ['age' => 50]]);
+        $collection = collect([['age' => 10], ['age' => 50]]);
         $this->assertSame(10, $collection->min('age'));
     }
 
     public function testMin_assoc_2()
     {
-        $collection = new SimpleCollection\Collection([['age' => 10], ['age' => 50]]);
+        $collection = collect([['age' => 10], ['age' => 50]]);
         $this->assertSame(null, $collection->min('count'));
     }
 
     public function testMin_assoc_3()
     {
-        $collection = new SimpleCollection\Collection([['age' => 10, 'count' => 30], ['age' => 50, 'count' => 30]]);
+        $collection = collect([['age' => 10, 'count' => 30], ['age' => 50, 'count' => 30]]);
         $this->assertSame(10, $collection->min('age'));
         $this->assertSame(30, $collection->min('count'));
         $this->assertSame(null, $collection->min('something'));
@@ -169,25 +169,25 @@ class CollectionTest extends TestCase
 
     public function testMax()
     {
-        $collection = new SimpleCollection\Collection([1344, 432562, 6432]);
+        $collection = collect([1344, 432562, 6432]);
         $this->assertSame(432562, $collection->max());
     }
 
     public function testMax_assoc()
     {
-        $collection = new SimpleCollection\Collection([['age' => 10], ['age' => 50]]);
+        $collection = collect([['age' => 10], ['age' => 50]]);
         $this->assertSame(50, $collection->max('age'));
     }
 
     public function testMax_assoc_2()
     {
-        $collection = new SimpleCollection\Collection([['age' => 10], ['age' => 50]]);
+        $collection = collect([['age' => 10], ['age' => 50]]);
         $this->assertSame(null, $collection->max('count'));
     }
 
     public function testMax_assoc_3()
     {
-        $collection = new SimpleCollection\Collection([['age' => 10, 'count' => 30], ['age' => 50, 'count' => 30]]);
+        $collection = collect([['age' => 10, 'count' => 30], ['age' => 50, 'count' => 30]]);
         $this->assertSame(50, $collection->max('age'));
         $this->assertSame(30, $collection->max('count'));
         $this->assertSame(null, $collection->max('something'));
@@ -195,26 +195,26 @@ class CollectionTest extends TestCase
 
     public function testSum()
     {
-        $collection = new SimpleCollection\Collection([10, 20, 30]);
+        $collection = collect([10, 20, 30]);
         $this->assertSame(60, $collection->sum());
     }
 
     public function testAvg()
     {
-        $collection = new SimpleCollection\Collection([10, 20, 30]);
+        $collection = collect([10, 20, 30]);
         $this->assertSame(20, $collection->avg());
     }
 
     public function testSync()
     {
-        $collection = new SimpleCollection\Collection([1, 2, 3]);
+        $collection = collect([1, 2, 3]);
         $collection->sync(['a', 'b', 'c']);
         $this->assertSame(['a', 'b', 'c'], $collection->toArray());
     }
 
     public function testContains()
     {
-        $collection = new SimpleCollection\Collection(['Lily', 'Robin']);
+        $collection = collect(['Lily', 'Robin']);
         $this->assertTrue($collection->contains('Lily'));
         $this->assertFalse($collection->contains('Ted'));
     }
@@ -224,28 +224,33 @@ class CollectionTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Contains method is not working with associative arrays.');
 
-        $collection = new SimpleCollection\Collection(['name' => 'Robin', 'age' => 20]);
+        $collection = collect(['name' => 'Robin', 'age' => 20]);
         $collection->contains('asdf');
     }
 
     public function testIsAssoc()
     {
-        $collection = new SimpleCollection\Collection([1, 2]);
+        $collection = collect([1, 2]);
         $this->assertFalse($collection->isAssoc());
 
-        $collection = new SimpleCollection\Collection(['a' => 1, 2]);
+        $collection = collect(['a' => 1, 2]);
         $this->assertTrue($collection->isAssoc());
 
-        $collection = new SimpleCollection\Collection(['a' => 1, 'b' => 2]);
+        $collection = collect(['a' => 1, 'b' => 2]);
         $this->assertTrue($collection->isAssoc());
     }
 
     public function testOnlyContainsArrays()
     {
-        $collection = new SimpleCollection\Collection([1, 2]);
+        $collection = collect([1, 2]);
         $this->assertFalse($collection->onlyContainsArrays());
 
-        $collection = new SimpleCollection\Collection([[1], [2]]);
+        $collection = collect([[1], [2]]);
         $this->assertTrue($collection->onlyContainsArrays());
     }
+}
+
+function collect(?array $array = []): SimpleCollection\Collection
+{
+    return new SimpleCollection\Collection($array);
 }
